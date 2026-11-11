@@ -1,0 +1,14 @@
+.tools/
+dist/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.zip
+*.log
+*.assets
+*.bundle
+*.rfc
+*.rfm
+*.rfl

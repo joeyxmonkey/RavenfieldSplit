@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>RavenfieldSplit</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <RavenfieldDir Condition="'$(RavenfieldDir)' == ''">$(RAVENFIELD_DIR)</RavenfieldDir>
+    <GameManaged>$(RavenfieldDir)/ravenfield_Data/Managed</GameManaged>
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(RavenfieldDir)/BepInEx/core</BepInExCore>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/*.cs" />
+    <Reference Include="BepInEx"><HintPath>$(BepInExCore)/BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExCore)/0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)/Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp-firstpass"><HintPath>$(GameManaged)/Assembly-CSharp-firstpass.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="AstarPathfindingProject"><HintPath>$(GameManaged)/AstarPathfindingProject.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameManaged)/UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(GameManaged)/UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>$(GameManaged)/UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>$(GameManaged)/UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(GameManaged)/UnityEngine.AnimationModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AudioModule"><HintPath>$(GameManaged)/UnityEngine.AudioModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(GameManaged)/UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UIModule"><HintPath>$(GameManaged)/UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(GameManaged)/UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="VerifyReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(GameManaged)/Assembly-CSharp.dll')" Text="Set RavenfieldDir to the installed Ravenfield directory." />
+    <Error Condition="!Exists('$(BepInExCore)/0Harmony.dll') Or !Exists('$(BepInExCore)/BepInEx.dll')" Text="Set BepInExCore to the BepInEx 5 core directory." />
+  </Target>
+</Project>
